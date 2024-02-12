@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Just for you</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="./heart.svg" />
+    <style>
+      body {
+        font-family: "Merienda", cursive;
+        background-color: #ffe0f0;
+        background-image: linear-gradient(135deg, #ff9a9e 10%, #fad0c4 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+      }
+      .container {
+        text-align: center;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        position: relative;
+        overflow: hidden;
+      }
+      button {
+        font-size: 18px;
+        padding: 15px 30px;
+        margin: 10px;
+        border: 2px solid transparent;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background-color: #ff85a2;
+        color: white;
+        position: relative;
+        z-index: 2;
+      }
+      button:hover {
+        background-color: #ff69b4;
+        color: #fff;
+        border-color: #ff1493;
+        transform: scale(1.1);
+      }
+      .btn-action:hover {
+        background-color: #f783ac;
+      }
+      .intro-text {
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #d10069;
+        text-shadow: 2px 2px 4px #ffb6c1;
+      }
+      .gif-container,
+      .message {
+        display: none;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+      }
+      .message {
+        font-size: 20px;
+        color: #ff1493;
+        margin-top: 20px;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px pink;
+      }
+
+      /* Background Hearts Animation */
+      @keyframes float {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 1;
+          border-radius: 0;
+        }
+        100% {
+          transform: translateY(-1000px) rotate(720deg);
+          opacity: 0;
+          border-radius: 50%;
+        }
+      }
+      .heart {
+        position: absolute;
+        bottom: -100px;
+        background-color: pink;
+        width: 40px;
+        height: 40px;
+        transform: rotate(45deg);
+        opacity: 0;
+        animation: float 5s ease-in infinite;
+      }
+      .heart:before,
+      .heart:after {
+        content: "";
+        background-color: pink;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+      }
+      .heart:before {
+        top: -20px;
+        left: 0;
+      }
+      .heart:after {
+        top: 0;
+        left: 20px;
+      }
+      /* Adding multiple hearts */
+      .heart:nth-child(2) {
+        animation-delay: 2s;
+        left: 20%;
+      }
+      .heart:nth-child(3) {
+        animation-delay: 4s;
+        left: 40%;
+      }
+      .heart:nth-child(4) {
+        animation-delay: 6s;
+        left: 60%;
+      }
+      .heart:nth-child(5) {
+        animation-delay: 8s;
+        left: 80%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" id="buttonContainer">
+      <div class="intro-text" id="introText">Will you be my Valentine?</div>
+      <button class="btn-love" id="btn1">YES</button>
+      <button class="btn-action" id="btn2">NO</button>
+      <div class="gif-container" id="gifContainer">
+        <img
+          src="https://gifdb.com/images/high/drake-heart-hands-aqm0moab2i6ocb44.webp"
+          alt="Valentine's Gif"
+        />
+      </div>
+      <div class="message" id="message">
+        lesss goooo baby..Happy Valentine's Day babe!
+      </div>
+      <!-- Heart Animations -->
+      <div class="heart"></div>
+      <div class="heart"></div>
+      <div class="heart"></div>
+      <div class="heart"></div>
+      <div class="heart"></div>
+    </div>
+
+    <script>
+      const btn1 = document.getElementById("btn1");
+      const btn2 = document.getElementById("btn2");
+      const introText = document.getElementById("introText");
+      const gifContainer = document.getElementById("gifContainer");
+      const message = document.getElementById("message");
+      let size = 16;
+      let paddingVertical = 10;
+      let paddingHorizontal = 20;
+      const texts = [
+        "YES(CLICK ME NOW)",
+        "YES(nooooo)",
+        "YES (but why?)",
+        "YES(don't you dare)",
+        "YES(my soul hurts)",
+      ];
+      let textIndex = 0;
+
+      btn1.addEventListener("click", function () {
+        btn1.style.display = "none";
+        btn2.style.display = "none";
+        gifContainer.style.display = "block";
+        message.style.display = "block";
+      });
+
+      btn2.addEventListener("click", function () {
+        size += 4;
+        paddingVertical += 5;
+        paddingHorizontal += 10;
+
+        btn1.style.fontSize = `${size}px`;
+        btn1.style.padding = `${paddingVertical}px ${paddingHorizontal}px`;
+        btn1.textContent = texts[textIndex];
+        textIndex = (textIndex + 1) % texts.length;
+      });
+    </script>
+  </body>
+</html>
